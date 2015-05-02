@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }} (using Django + React)</title>
+  	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.css' %}">
+  	<link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-md-6">
+      
+          <div class="panel panel-default">
+
+            <div class="panel-body">
+
+
+              <div id="content">
+          			
+                <!-- the App goes here -->
+                {{ markup }}
+          			
+              </div>
+
+
+            </div>
+          </div>
+  
+       </div>
+     </div>
+
+
+    <!-- load React -->
+	  <script src="{% static 'vendor/react/react-0.13.1.js' %}"></script>      
+    
+
+		<!--
+			Mount the bundled component over the rendered markup (wire up events)
+		-->
+		{{ markup.render_js }}
+        
+  </body>
+</html>

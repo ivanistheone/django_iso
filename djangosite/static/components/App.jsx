@@ -1,5 +1,5 @@
 var React = require("react"),
-    Search = require("./search");
+    Search = require("./Search.jsx");
 
 var App = React.createClass({
   render() {
