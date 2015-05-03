@@ -2,6 +2,7 @@
 # The local virtualenv called pydev
 pydev
 .DS_Store
+./static
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
