@@ -13,16 +13,16 @@ Install
 
 1. Create a virtual environment for the example
 
-    virtualenv pydev
-    source pydev/bin/activate
+        virtualenv pydev
+        source pydev/bin/activate
 
 2. Install the project's python dependencies:
 
-    pip install -r requirements.txt
+        pip install -r requirements.txt
 
 3. Install the project's JS dependencies (assumes you already have node installed):
 
-    npm install .
+        npm install .
 
 
 
