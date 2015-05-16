@@ -2,7 +2,9 @@
 # The local virtualenv called pydev
 pydev
 .DS_Store
-./static
+
+# this is where django and webpack will put their files 
+static
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

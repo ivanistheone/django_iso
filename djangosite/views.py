@@ -1,12 +1,16 @@
-from django.shortcuts import render
+import os
 
-from django_react.render import render_component
+from django.shortcuts import render
+from django.conf import settings
+
+from react.render import render_component
+
 
 def index(request):
     # Render the App component down to HTML
     markup = render_component(
-        'components/App.jsx',
-        # Path to the component is resolved via Django's static-file finders
+        # Abs Path required
+        os.path.join(settings.BASE_DIR, 'djangosite', 'static', 'components/App.jsx'),
 
         # We can pass data along to the component which will be
         # accessible from the component via its `this.props` property

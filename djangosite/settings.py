@@ -1,7 +1,7 @@
 import os
 
 # DJANGO
-# ======
+################################################################################
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -13,12 +13,14 @@ SECRET_KEY = '_'
 
 INSTALLED_APPS = (
     'django.contrib.staticfiles',
+    'webpack',                                                         # WEBPACK
 )
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
-)
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'webpack.django_integration.WebpackFinder',                        # WEBPACK
+)  
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'djangosite', 'static'),
@@ -37,46 +39,29 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-# DJANGO NODE
-# ===========
 
-INSTALLED_APPS += (
-    'django_node',
+# REACT   <-->  JS host
+################################################################################
+
+from js_host.conf import settings as js_host_settings
+from react.conf import settings as react_settings
+
+js_host_settings.configure(
+    USE_MANAGER=DEBUG
 )
 
-DJANGO_NODE = {
-    'SERVICES': (),
-    'PACKAGE_DEPENDENCIES': (),
+react_settings.configure(
+    DEVTOOL='eval' if DEBUG else None,
+)
+
+
+# WEBPACK                                                           also above ^ 
+################################################################################
+
+WEBPACK = {
+    'BUNDLE_ROOT': STATIC_ROOT,
+    'BUNDLE_URL': STATIC_URL,
+    'WATCH_CONFIG_FILES': DEBUG,
+    'WATCH_SOURCE_FILES': DEBUG,
 }
 
-# Instruct django-node to install the package.json dependencies
-DJANGO_NODE['PACKAGE_DEPENDENCIES'] += (
-    BASE_DIR,
-)
-
-
-# DJANGO WEBPACK
-# ==============
-
-INSTALLED_APPS += (
-    'django_webpack',
-)
-
-DJANGO_NODE['SERVICES'] += (
-    'django_webpack.services',
-)
-
-STATICFILES_FINDERS += (
-    'django_webpack.staticfiles.WebpackFinder',
-)
-
-# DJANGO REACT
-# ============
-
-INSTALLED_APPS += (
-    'django_react',
-)
-
-DJANGO_NODE['SERVICES'] += (
-    'django_react.services',
-)

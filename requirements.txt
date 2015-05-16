@@ -1,2 +1,3 @@
 django
-django-react==0.11.0
+js-host
+react
